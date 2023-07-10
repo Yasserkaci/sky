@@ -29,6 +29,7 @@ class Lexer:
 	def advance(self):
 		self.pos.advance(self.current_char)
 		self.current_char = self.text[self.pos.idx] if self.pos.idx < len(self.text) else None
+		self.next_char = self.text[self.pos.idx + 1] if self.pos.idx + 1 < len(self.text) else None
 
 	def make_tokens(self):
 		tokens = []
@@ -44,15 +45,21 @@ class Lexer:
 			elif self.current_char == '-':
 				tokens.append(Token(TT_MINUS, pos_start=self.pos))
 				self.advance()
+			elif self.current_char == '*' and self.next_char == '*':
+				tokens.append(Token(TT_POW, pos_start=self.pos))
+				self.advance()
+				self.advance()
 			elif self.current_char == '*':
 				tokens.append(Token(TT_MUL, pos_start=self.pos))
 				self.advance()
 			elif self.current_char == '/':
 				tokens.append(Token(TT_DIV, pos_start=self.pos))
 				self.advance()
-			elif self.current_char == '^':
+				'''
+			elif self.current_char == '^' :
 				tokens.append(Token(TT_POW, pos_start=self.pos))
 				self.advance()
+				'''
 			elif self.current_char == '(':
 				tokens.append(Token(TT_LPAREN, pos_start=self.pos))
 				self.advance()

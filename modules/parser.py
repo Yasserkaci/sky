@@ -1,6 +1,7 @@
 # IMPORTING
 
 from modules.node import *
+from modules.error import *
 
 # constans
 
