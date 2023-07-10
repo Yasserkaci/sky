@@ -1,4 +1,6 @@
 import sky
+
+
 while True: 
     text = input("sky >>> ")
     result, error = sky.run('<stdin>', text)
